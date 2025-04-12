@@ -1,9 +1,109 @@
-export default function login() {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-        <h1 className="text-3xl font-bold mb-4">Login Page</h1>
-        {/* Add login form here */}
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    setError('');
+
+    if (!email || !password) {
+      setError('Email and password are required.');
+      return;
+    }
+
+    const isValidEmail = /^\S+@\S+\.\S+$/.test(email);
+    if (!isValidEmail) {
+      setError('Please enter a valid email.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.token) {
+        // Save token if needed
+        sessionStorage.setItem('token', data.token);
+
+        // Fetch full user details using email
+        const userRes = await fetch('/api/get-user-by-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        const userData = await userRes.json();
+        
+        if (!userData.error) {
+          sessionStorage.setItem('user', JSON.stringify(userData));
+        } else {
+          console.error('User fetch failed after login');
+        }
+
+        router.replace('/dashboard');
+      } else {
+        setError(data.error || 'Incorrect email or password.');
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-4">
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md animate-fadeIn">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
+
+        <input
+          placeholder="Email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+        <input
+          placeholder="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+
+        <button
+          onClick={handleLogin}
+          disabled={loading}
+          className={`w-full bg-indigo-600 text-white py-2 rounded-md transition duration-200 ${
+            loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700 cursor-pointer'
+          }`}
+        >
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?{' '}
+          <span
+            onClick={() => router.push('/register')}
+            className="text-indigo-600 font-medium hover:underline cursor-pointer"
+          >
+            Register here
+          </span>
+        </p>
       </div>
-    );
-  }
-  
+    </div>
+  );
+}

@@ -10,13 +10,13 @@ export default function Home() {
       <h1 className="text-4xl font-bold mb-6">Task Manager</h1>
       <div className="flex gap-4">
         <button
-          className="bg-blue-500 px-6 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 px-6 py-2 rounded hover:bg-blue-600 cursor-pointer"
           onClick={() => router.push('/register')}
         >
           Register
         </button>
         <button
-          className="bg-green-500 px-6 py-2 rounded hover:bg-green-600"
+          className="bg-green-500 px-6 py-2 rounded hover:bg-green-600 cursor-pointer"
           onClick={() => router.push('/login')}
         >
           Login
