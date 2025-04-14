@@ -1,3 +1,4 @@
+// src/app/api/auth/login/route.js
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
@@ -19,5 +20,9 @@ export async function POST(req) {
 
   const token = createToken(user);
 
-  return Response.json({ message: 'Login success', token });
+  // Set secure HTTP-only cookie
+  const response = Response.json({ message: 'Login success' });
+  response.headers.set('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=86400; SameSite=Strict; Secure`);
+
+  return response;
 }

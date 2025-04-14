@@ -14,13 +14,11 @@ export default function Register() {
 
   const handleRegister = async () => {
     setError('');
-    setSuccess('');
-
-    if (!email || !password) {
-      setError('Email and password are required.');
+  
+    if (!email || !password || !name) {
+      setError('All fields are required.');
       return;
     }
-
     const isValidEmail = /^\S+@\S+\.\S+$/.test(email);
     if (!isValidEmail) {
       setError('Please enter a valid email.');
@@ -31,22 +29,20 @@ export default function Register() {
       setError('Password must be at least 6 characters.');
       return;
     }
-
+  
     setLoading(true);
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
-        body: JSON.stringify({name, email, password }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
       });
-
+  
       const data = await res.json();
-
+  
       if (res.ok) {
-        setSuccess('Registered successfully! Redirecting...');
-        localStorage.setItem('userData', JSON.stringify(data?.user));
-        setTimeout(() => {
-          router.push('/login');
-        }, 2000);
+        // Token already set in HTTP-only cookie (no need to store manually)
+        router.replace('/dashboard'); // Auto login after register
       } else {
         setError(data.error || 'Registration failed.');
       }
@@ -56,6 +52,7 @@ export default function Register() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-600 via-emerald-500 to-teal-400 px-4">

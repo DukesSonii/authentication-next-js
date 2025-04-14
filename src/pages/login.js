@@ -16,18 +16,18 @@ export default function Login() {
 
   const handleLogin = async () => {
     setError('');
-
+  
     if (!email || !password) {
       setError('Email and password are required.');
       return;
     }
-
+  
     const isValidEmail = /^\S+@\S+\.\S+$/.test(email);
     if (!isValidEmail) {
       setError('Please enter a valid email.');
       return;
     }
-
+  
     setLoading(true);
     try {
       const res = await fetch('/api/auth/login', {
@@ -35,28 +35,11 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await res.json();
-
-      if (res.ok && data.token) {
-        // Save token if needed
-        sessionStorage.setItem('token', data.token);
-
-        // Fetch full user details using email
-        const userRes = await fetch('/api/get-user-by-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        });
-
-        const userData = await userRes.json();
-        
-        if (!userData.error) {
-          sessionStorage.setItem('user', JSON.stringify(userData));
-        } else {
-          console.error('User fetch failed after login');
-        }
-
+  
+      if (res.ok) {
+        // Login success — no need to manually store token
         router.replace('/dashboard');
       } else {
         setError(data.error || 'Incorrect email or password.');
@@ -67,6 +50,7 @@ export default function Login() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-4">
@@ -100,10 +84,19 @@ export default function Login() {
         
         <div className="flex items-center justify-between gap-4">
 
-        <button   onClick={() => signIn('google', { prompt: 'select_account' })} className="w-full text-sm flex items-center justify-center bg-gray-100 border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:bg-gray-200 cursor-pointer mt-4">
+        <button
+          onClick={() =>
+            signIn('google', {
+              prompt: 'select_account',
+              callbackUrl: '/dashboard',
+            })
+          }
+          className="w-full text-sm flex items-center justify-center bg-gray-100 border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:bg-gray-200 cursor-pointer mt-4"
+        >
           <span className="mr-2">Login with Google</span>
           <FcGoogle size={17} />
         </button>
+
         <button className="w-full flex text-sm items-center justify-center bg-gray-100 border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:bg-gray-200 cursor-pointer mt-4">
           <span className="mr-2">Login with Facebook</span>
           <FaFacebook size={17} />
