@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { FcGoogle } from "react-icons/fc";
+import { signIn } from 'next-auth/react';
+import { FaFacebook } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -93,9 +97,24 @@ export default function Login() {
         >
           {loading ? 'Logging in...' : 'Login'}
         </button>
+        
+        <div className="flex items-center justify-between gap-4">
 
+        <button   onClick={() => signIn('google', { prompt: 'select_account' })} className="w-full text-sm flex items-center justify-center bg-gray-100 border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:bg-gray-200 cursor-pointer mt-4">
+          <span className="mr-2">Login with Google</span>
+          <FcGoogle size={17} />
+        </button>
+        <button className="w-full flex text-sm items-center justify-center bg-gray-100 border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:bg-gray-200 cursor-pointer mt-4">
+          <span className="mr-2">Login with Facebook</span>
+          <FaFacebook size={17} />
+        </button>
+        </div>
+        <button className="flex text-sm items-center m-auto justify-center bg-gray-100 border border-gray-300 text-gray-800 px-4 py-2 rounded-md transition duration-200 hover:bg-gray-200 cursor-pointer mt-4">
+          <span className="mr-2">Login with GitHub</span>
+          <FaGithub size={17} />
+        </button>
         <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
+          Don't have an account? &nbsp;
           <span
             onClick={() => router.push('/register')}
             className="text-indigo-600 font-medium hover:underline cursor-pointer"
