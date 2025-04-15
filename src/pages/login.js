@@ -118,7 +118,7 @@ export default function Login() {
                 callbackUrl: '/dashboard',
               })
             }
-            className="w-full flex text-sm items-center justify-center bg-[#1877F2] text-white py-2 rounded-md transition duration-200 hover:shadow-md cursor-pointer"
+            className="w-full flex text-sm items-center justify-center bg-[#1877F2] text-white py-2 rounded-md transition duration-200 hover:bg-[#055dcd] shadow-md cursor-pointer"
           >
             <span className="mr-2">Facebook</span>
             <FaFacebook size={17} />
@@ -132,7 +132,7 @@ export default function Login() {
               callbackUrl: '/dashboard',
             })
           }
-          className="flex text-sm items-center justify-center bg-black text-white px-4 py-2 rounded-md transition duration-200 hover:shadow-md cursor-pointer mt-4 w-full"
+          className="flex text-sm items-center justify-center bg-[#252424] text-white px-4 py-2 rounded-md transition duration-200 hover:bg-[black] shadow-md cursor-pointer mt-4 w-full"
         >
           <span className="mr-2">GitHub</span>
           <FaGithub size={17} />
