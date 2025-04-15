@@ -6,24 +6,21 @@ import { FcGoogle } from "react-icons/fc";
 import { signIn } from 'next-auth/react';
 import { FaFacebook } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
-import { getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
+  const { data: session, status } = useSession();  
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const checkSession = async () => {
-      const session = await getSession();
-      if (session) {
-        router.replace('/dashboard');
-      }
-    };
-    checkSession();
-  }, [router]);
+    if (status === 'authenticated') {
+      router.replace('/dashboard');
+    }
+  }, [status]);
   
 
   const handleLogin = async () => {
