@@ -30,7 +30,7 @@ export default function HomePage() {
           const data = await res.json();
           setUserInfo({ name: data.name || '', email: data.email || '' });
         } catch (error) {
-          router.replace('/login');
+          router.replace('/User/login');
         }
       }
     };
@@ -40,10 +40,10 @@ export default function HomePage() {
   
   const handleLogout = async () => {
     if (session?.user) {
-      await signOut({ callbackUrl: '/login' });
+      await signOut({ callbackUrl: '/User/login' });
     } else {
       await fetch('/api/auth/logout', { method: 'POST' });
-      router.replace('/login');
+      router.replace('/User/login');
     }
   };
 
