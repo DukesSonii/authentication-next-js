@@ -42,7 +42,7 @@ export default function Register() {
   
       if (res.ok) {
         // Token already set in HTTP-only cookie (no need to store manually)
-        router.replace('/dashboard'); // Auto login after register
+        router.replace('/userdashboard'); 
       } else {
         setError(data.error || 'Registration failed.');
       }

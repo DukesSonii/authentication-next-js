@@ -18,7 +18,7 @@ export default function Login() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      router.replace('/dashboard');
+      router.replace('/Userdashboard');
     }
   }, [status]);
   
@@ -48,7 +48,7 @@ export default function Login() {
       const data = await res.json();
 
       if (res.ok) {
-        router.replace('/dashboard');
+        router.replace('/Userdashboard');
       } else {
         setError(data.error || 'Incorrect email or password.');
       }
@@ -102,7 +102,7 @@ export default function Login() {
             onClick={() =>
               signIn('google', {
                 prompt: 'select_account',
-                callbackUrl: '/dashboard',
+                callbackUrl: '/Userdashboard',
               })
             }
             className="w-full text-sm flex items-center justify-center bg-white border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:shadow-md cursor-pointer"
@@ -115,7 +115,7 @@ export default function Login() {
             onClick={() =>
               signIn('facebook', {
                 prompt: 'select_account',
-                callbackUrl: '/dashboard',
+                callbackUrl: '/Userdashboard',
               })
             }
             className="w-full flex text-sm items-center justify-center bg-[#1877F2] text-white py-2 rounded-md transition duration-200 hover:bg-[#055dcd] shadow-md cursor-pointer"
@@ -129,7 +129,7 @@ export default function Login() {
           onClick={() =>
             signIn('github', {
               prompt: 'select_account',
-              callbackUrl: '/dashboard',
+              callbackUrl: '/Userdashboard',
             })
           }
           className="flex text-sm items-center justify-center bg-[#252424] text-white px-4 py-2 rounded-md transition duration-200 hover:bg-[black] shadow-md cursor-pointer mt-4 w-full"

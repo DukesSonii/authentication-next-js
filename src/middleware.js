@@ -11,10 +11,10 @@ export function middleware(req) {
   const { pathname } = req.nextUrl;
 
   if (isLoggedIn && (pathname === '/login' || pathname === '/register')) {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
+    return NextResponse.redirect(new URL('/Userdashboard', req.url));
   }
 
-  if (!isLoggedIn && pathname.startsWith('/dashboard')) {
+  if (!isLoggedIn && pathname.startsWith('/Userdashboard')) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
