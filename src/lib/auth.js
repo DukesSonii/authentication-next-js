@@ -19,3 +19,15 @@ export const createSellerToken = (seller) => {
 export const verifySellerToken = (token) => {
   return jwt.verify(token, process.env.SELLER_JWT_SECRET);
 };
+
+export const createAdminToken = (admin) => {
+  return jwt.sign(
+    { id: admin._id, email: admin.email },
+    process.env.ADMIN_JWT_SECRET,
+    { expiresIn: '4d' }
+  );
+};
+
+export const verifyAdminToken = (token) => {
+  return jwt.verify(token, process.env.ADMIN_JWT_SECRET);
+};
