@@ -7,6 +7,7 @@ import { signIn } from 'next-auth/react';
 import { FaFacebook } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { useSession } from 'next-auth/react';
+import Navbar from '../Navbar';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -60,94 +61,97 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-4">
-      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md animate-fadeIn">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
+    <>
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 px-4">
+        <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md animate-fadeIn">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
 
-        <input
-          placeholder="Email"
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
+          <input
+            placeholder="Email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
 
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-        <button
-          onClick={handleLogin}
-          disabled={loading}
-          className={`w-full bg-indigo-600 text-white py-2 rounded-md transition duration-200 ${
-            loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700 cursor-pointer'
-          }`}
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
+          <button
+            onClick={handleLogin}
+            disabled={loading}
+            className={`w-full bg-indigo-600 text-white py-2 rounded-md transition duration-200 ${
+              loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700 cursor-pointer'
+            }`}
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
 
-        {/* Divider */}
-        <div className="flex items-center my-6">
-          <div className="flex-grow h-px bg-gray-300"></div>
-          <span className="mx-4 text-gray-500 text-sm font-medium">or continue with</span>
-          <div className="flex-grow h-px bg-gray-300"></div>
-        </div>
+          {/* Divider */}
+          <div className="flex items-center my-6">
+            <div className="flex-grow h-px bg-gray-300"></div>
+            <span className="mx-4 text-gray-500 text-sm font-medium">or continue with</span>
+            <div className="flex-grow h-px bg-gray-300"></div>
+          </div>
 
-        {/* Social Buttons */}
-        <div className="flex items-center justify-between gap-4">
+          {/* Social Buttons */}
+          <div className="flex items-center justify-between gap-4">
+            <button
+              onClick={() =>
+                signIn('google', {
+                  prompt: 'select_account',
+                  callbackUrl: '/Userdashboard',
+                })
+              }
+              className="w-full text-sm flex items-center justify-center bg-white border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:shadow-md cursor-pointer"
+            >
+              <span className="mr-2">Google</span>
+              <FcGoogle size={17} />
+            </button>
+
+            <button
+              onClick={() =>
+                signIn('facebook', {
+                  prompt: 'select_account',
+                  callbackUrl: '/Userdashboard',
+                })
+              }
+              className="w-full flex text-sm items-center justify-center bg-[#1877F2] text-white py-2 rounded-md transition duration-200 hover:bg-[#055dcd] shadow-md cursor-pointer"
+            >
+              <span className="mr-2">Facebook</span>
+              <FaFacebook size={17} />
+            </button>
+          </div>
+
           <button
             onClick={() =>
-              signIn('google', {
+              signIn('github', {
                 prompt: 'select_account',
                 callbackUrl: '/Userdashboard',
               })
             }
-            className="w-full text-sm flex items-center justify-center bg-white border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:shadow-md cursor-pointer"
+            className="flex text-sm items-center justify-center bg-[#252424] text-white px-4 py-2 rounded-md transition duration-200 hover:bg-[black] shadow-md cursor-pointer mt-4 w-full"
           >
-            <span className="mr-2">Google</span>
-            <FcGoogle size={17} />
+            <span className="mr-2">GitHub</span>
+            <FaGithub size={17} />
           </button>
 
-          <button
-            onClick={() =>
-              signIn('facebook', {
-                prompt: 'select_account',
-                callbackUrl: '/Userdashboard',
-              })
-            }
-            className="w-full flex text-sm items-center justify-center bg-[#1877F2] text-white py-2 rounded-md transition duration-200 hover:bg-[#055dcd] shadow-md cursor-pointer"
-          >
-            <span className="mr-2">Facebook</span>
-            <FaFacebook size={17} />
-          </button>
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Don't have an account? &nbsp;
+            <span
+              onClick={() => router.push('/User/register')}
+              className="text-indigo-600 font-medium hover:underline cursor-pointer"
+            >
+              Register here
+            </span>
+          </p>
         </div>
-
-        <button
-          onClick={() =>
-            signIn('github', {
-              prompt: 'select_account',
-              callbackUrl: '/Userdashboard',
-            })
-          }
-          className="flex text-sm items-center justify-center bg-[#252424] text-white px-4 py-2 rounded-md transition duration-200 hover:bg-[black] shadow-md cursor-pointer mt-4 w-full"
-        >
-          <span className="mr-2">GitHub</span>
-          <FaGithub size={17} />
-        </button>
-
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account? &nbsp;
-          <span
-            onClick={() => router.push('/register')}
-            className="text-indigo-600 font-medium hover:underline cursor-pointer"
-          >
-            Register here
-          </span>
-        </p>
       </div>
-    </div>
+    </>
   );
 }
