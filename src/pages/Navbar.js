@@ -24,7 +24,7 @@ export default function Navbar() {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    const isActive = (path) => pathname === path;
+    const isActive = (path) => pathname.startsWith(path);
 
     return (
         <nav
@@ -54,7 +54,7 @@ export default function Navbar() {
                     <li
                       onClick={handleAdminLogin}
                       className={`flex flex-col px-4 py-3 rounded-xl cursor-pointer transition-colors 
-                        ${isActive('/Admin/login') ? 'bg-sky-900' : 'hover:bg-sky-900'}`}
+                        ${isActive('/Admin') ? 'bg-sky-900' : 'hover:bg-sky-900'}`}
                     >
                       <div className="flex items-center gap-3">
                         <svg className="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -70,7 +70,7 @@ export default function Navbar() {
                     <li
                       onClick={handleSellerLogin}
                       className={`flex flex-col px-4 py-3 rounded-xl cursor-pointer transition-colors 
-                        ${isActive('/Seller/login') ? 'bg-purple-900' : 'hover:bg-purple-900'}`}
+                        ${isActive('/Seller') ? 'bg-purple-900' : 'hover:bg-purple-900'}`}
                     >
                       <div className="flex items-center gap-3">
                         <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ export default function Navbar() {
                     <li
                       onClick={handleUserLogin}
                       className={`flex flex-col px-4 py-3 rounded-xl cursor-pointer transition-colors 
-                        ${isActive('/User/login') ? 'bg-emerald-900' : 'hover:bg-emerald-900'}`}
+                        ${isActive('/User/') ? 'bg-emerald-900' : 'hover:bg-emerald-900'}`}
                     >
                       <div className="flex items-center gap-3">
                         <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
