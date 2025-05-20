@@ -18,9 +18,9 @@ export function middleware(req) {
 
   if (pathname.startsWith('/User')) {
     if (isUserLoggedIn && (pathname === '/user/login' || pathname === '/account/register')) {
-      return NextResponse.redirect(new URL('/user-dashboard', req.url));
+      return NextResponse.redirect(new URL('/account/dashboard', req.url));
     }
-    if (!isUserLoggedIn && pathname.startsWith('/user-dashboard')) {
+    if (!isUserLoggedIn && pathname.startsWith('/account/dashboard')) {
       return NextResponse.redirect(new URL('/account/login', req.url));
     }
   }
@@ -36,9 +36,9 @@ export function middleware(req) {
 
   if(pathname.startsWith('/admin')) {
     if (isAdminLoggedIn && pathname === '/admin/login') {
-      return NextResponse.redirect(new URL('/admin-dashboard', req.url));
+      return NextResponse.redirect(new URL('/admin/dashboard', req.url));
     }
-    if (!isAdminLoggedIn && pathname.startsWith('/admin-dashboard')) {
+    if (!isAdminLoggedIn && pathname.startsWith('/admin/dashboard')) {
       return NextResponse.redirect(new URL('/admin/login', req.url));
     }
   }

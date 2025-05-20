@@ -29,7 +29,7 @@ const handler = NextAuth({
       return true;
     },
     async redirect({ url, baseUrl }) {
-       return `${baseUrl}/user-dashboard`;
+       return `${baseUrl}/account/dashboard`;
     },
     async session({ session, token }) {
       // Optional: attach token data
@@ -46,7 +46,7 @@ const handler = NextAuth({
     signIn: '/login',
     signOut: '/login',
     error: '/login',
-    callback: '/user-dashboard', 
+    callback: '/account/dashboard', 
   },  
 })
 

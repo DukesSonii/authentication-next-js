@@ -1,4 +1,4 @@
-// src/app/api/auth/logout/route.js
+// src/app/controllers/auth/logout/route.js
 
 export async function POST(req) {
   // Remove the token by setting it with Max-Age=0

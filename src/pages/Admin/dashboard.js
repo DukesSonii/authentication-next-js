@@ -14,7 +14,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         const fetchAdmin = async () => {
         try {
-            const res = await fetch('/api/admin-auth/get-current-admin');
+            const res = await fetch('/controllers/admin-auth/get-current-admin');
             const data = await res.json();
 
             if (res.ok) {
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
     }, []);
 
     const handleLogout = async () => {
-        const res = await fetch('/api/admin-auth/logout', { method: 'POST' });
+        const res = await fetch('/controllers/admin-auth/logout', { method: 'POST' });
         if (res.ok) {
          router.push(ROUTES.ADMIN_LOGIN);
         }

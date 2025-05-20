@@ -4,8 +4,8 @@ export const ROUTES = {
   SELLER_REGISTER: '/seller/register',
   USER_LOGIN: '/account/login',
   USER_REGISTER: '/account/register',
-  ADMIN_DASHBOARD: '/admin-dashboard',
-  SELLER_DASHBOARD: '/seller-dashboard',
-  USER_DASHBOARD: '/user-dashboard',
+  ADMIN_DASHBOARD: '/admin/dashboard',
+  SELLER_DASHBOARD: '/seller/dashboard',
+  USER_DASHBOARD: '/account/dashboard',
  };
 

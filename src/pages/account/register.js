@@ -33,7 +33,7 @@ export default function Register() {
   
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/register', {
+      const res = await fetch('/controllers/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
@@ -43,7 +43,7 @@ export default function Register() {
   
       if (res.ok) {
         // Token already set in HTTP-only cookie (no need to store manually)
-        router.replace('/user-dashboard'); 
+        router.replace('/account/dashboard'); 
       } else {
         setError(data.error || 'Registration failed.');
       }

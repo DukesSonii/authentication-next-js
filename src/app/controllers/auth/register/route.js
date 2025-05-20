@@ -1,4 +1,4 @@
-// src/app/api/auth/register/route.js
+// src/app/controllers/auth/register/route.js
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
