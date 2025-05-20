@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '../Navbar';
+import Navbar from '../navbar';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +30,7 @@ const AdminLogin = () => {
       const data = await res.json();
 
       if (res.ok) {
-        router.push('/AdminDashboard');
+        router.push('/admin-dashboard');
       } else {
         setError(data.error || 'Invalid credentials.');
       }

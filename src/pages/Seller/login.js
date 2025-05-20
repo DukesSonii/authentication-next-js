@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '../Navbar';
+import Navbar from '../navbar';
 
 export default function SellerLogin() {
   const [email, setEmail] = useState('');
@@ -35,7 +35,7 @@ export default function SellerLogin() {
       const data = await res.json();
 
       if (res.ok) {
-        router.replace('/SellerDashboard');
+        router.replace('/seller-dashboard');
       } else {
         setError(data.error || 'Invalid credentials.');
       }

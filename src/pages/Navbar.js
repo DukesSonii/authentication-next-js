@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { HiMenu } from 'react-icons/hi';
+import { ROUTES } from '@/lib/route';
 
 export default function Navbar() {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -10,9 +11,9 @@ export default function Navbar() {
     const router = useRouter();
     const pathname = usePathname(); 
 
-    const handleUserLogin = () => router.push('/User/login');
-    const handleSellerLogin = () => router.push('/Seller/login');
-    const handleAdminLogin = () => router.push('/Admin/login'); 
+    const handleUserLogin = () =>  router.push(ROUTES.USER_LOGIN);
+    const handleSellerLogin = () => router.push(ROUTES.SELLER_LOGIN);
+    const handleAdminLogin = () => router.push(ROUTES.ADMIN_LOGIN); 
 
     useEffect(() => {
         const handleClickOutside = (event) => {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '../Navbar';
+import Navbar from '../navbar';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -43,7 +43,7 @@ export default function Register() {
   
       if (res.ok) {
         // Token already set in HTTP-only cookie (no need to store manually)
-        router.replace('/userdashboard'); 
+        router.replace('/user-dashboard'); 
       } else {
         setError(data.error || 'Registration failed.');
       }

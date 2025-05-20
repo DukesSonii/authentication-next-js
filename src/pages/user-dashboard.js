@@ -1,5 +1,6 @@
 'use client';
 
+import { ROUTES } from "@/lib/route";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -30,7 +31,7 @@ export default function HomePage() {
           const data = await res.json();
           setUserInfo({ name: data.name || '', email: data.email || '' });
         } catch (error) {
-          router.replace('/User/login');
+           router.replace(ROUTES.USER_LOGIN);
         }
       }
     };
@@ -43,7 +44,7 @@ export default function HomePage() {
       await signOut({ callbackUrl: '/User/login' });
     } else {
       await fetch('/api/auth/logout', { method: 'POST' });
-      router.replace('/User/login');
+       router.replace(ROUTES.USER_LOGIN);
     }
   };
 

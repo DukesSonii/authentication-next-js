@@ -1,5 +1,6 @@
 // middleware.js
 import { NextResponse } from 'next/server';
+import { ROUTES } from './lib/route';
 
 export function middleware(req) {
   const userManualToken = req.cookies.get('token')?.value; 
@@ -16,29 +17,29 @@ export function middleware(req) {
   const { pathname } = req.nextUrl;
 
   if (pathname.startsWith('/User')) {
-    if (isUserLoggedIn && (pathname === '/User/login' || pathname === '/User/register')) {
-      return NextResponse.redirect(new URL('/Userdashboard', req.url));
+    if (isUserLoggedIn && (pathname === '/user/login' || pathname === '/account/register')) {
+      return NextResponse.redirect(new URL('/user-dashboard', req.url));
     }
-    if (!isUserLoggedIn && pathname.startsWith('/Userdashboard')) {
-      return NextResponse.redirect(new URL('/User/login', req.url));
-    }
-  }
-
-  if (pathname.startsWith('/Seller')) {
-    if (isSellerLoggedIn && (pathname === '/Seller/login' || pathname === '/Seller/register')) {
-      return NextResponse.redirect(new URL('/SellerDashboard', req.url));
-    }
-    if (!isSellerLoggedIn && pathname.startsWith('/SellerDashboard')) {
-      return NextResponse.redirect(new URL('/Seller/login', req.url));
+    if (!isUserLoggedIn && pathname.startsWith('/user-dashboard')) {
+      return NextResponse.redirect(new URL('/account/login', req.url));
     }
   }
 
-  if(pathname.startsWith('/Admin')) {
-    if (isAdminLoggedIn && pathname === '/Admin/login') {
-      return NextResponse.redirect(new URL('/AdminDashboard', req.url));
+  if (pathname.startsWith('/seller')) {
+    if (isSellerLoggedIn && (pathname === '/seller/login' || pathname === '/seller/register')) {
+      return NextResponse.redirect(new URL('/seller-dashboard', req.url));
     }
-    if (!isAdminLoggedIn && pathname.startsWith('/AdminDashboard')) {
-      return NextResponse.redirect(new URL('/Admin/login', req.url));
+    if (!isSellerLoggedIn && pathname.startsWith('/seller-dashboard')) {
+      return NextResponse.redirect(new URL('/seller/login', req.url));
+    }
+  }
+
+  if(pathname.startsWith('/admin')) {
+    if (isAdminLoggedIn && pathname === '/admin/login') {
+      return NextResponse.redirect(new URL('/admin-dashboard', req.url));
+    }
+    if (!isAdminLoggedIn && pathname.startsWith('/admin-dashboard')) {
+      return NextResponse.redirect(new URL('/admin/login', req.url));
     }
   }
   return NextResponse.next();

@@ -7,7 +7,8 @@ import { signIn } from 'next-auth/react';
 import { FaFacebook } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { useSession } from 'next-auth/react';
-import Navbar from '../Navbar';
+import Navbar from '../navbar';
+import { ROUTES } from '@/lib/route';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      router.replace('/Userdashboard');
+      router.replace('/user-dashboard');
     }
   }, [status]);
   
@@ -49,7 +50,7 @@ export default function Login() {
       const data = await res.json();
 
       if (res.ok) {
-        router.replace('/Userdashboard');
+        router.replace('/user-dashboard');
       } else {
         setError(data.error || 'Incorrect email or password.');
       }
@@ -105,7 +106,7 @@ export default function Login() {
               onClick={() =>
                 signIn('google', {
                   prompt: 'select_account',
-                  callbackUrl: '/Userdashboard',
+                  callbackUrl: '/user-dashboard',
                 })
               }
               className="w-full text-sm flex items-center justify-center bg-white border border-gray-300 text-gray-800 py-2 rounded-md transition duration-200 hover:shadow-md cursor-pointer"
@@ -118,7 +119,7 @@ export default function Login() {
               onClick={() =>
                 signIn('facebook', {
                   prompt: 'select_account',
-                  callbackUrl: '/Userdashboard',
+                  callbackUrl: '/user-dashboard',
                 })
               }
               className="w-full flex text-sm items-center justify-center bg-[#1877F2] text-white py-2 rounded-md transition duration-200 hover:bg-[#055dcd] shadow-md cursor-pointer"
@@ -132,7 +133,7 @@ export default function Login() {
             onClick={() =>
               signIn('github', {
                 prompt: 'select_account',
-                callbackUrl: '/Userdashboard',
+                callbackUrl: '/user-dashboard',
               })
             }
             className="flex text-sm items-center justify-center bg-[#252424] text-white px-4 py-2 rounded-md transition duration-200 hover:bg-[black] shadow-md cursor-pointer mt-4 w-full"
@@ -144,7 +145,7 @@ export default function Login() {
           <p className="mt-4 text-center text-sm text-gray-600">
             Don't have an account? &nbsp;
             <span
-              onClick={() => router.push('/User/register')}
+              onClick={() => router.push(ROUTES.USER_REGISTER)}
               className="text-indigo-600 font-medium hover:underline cursor-pointer"
             >
               Register here

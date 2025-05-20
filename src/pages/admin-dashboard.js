@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUserShield } from 'react-icons/fa';
+import { ROUTES } from '@/lib/route';
 
 const AdminDashboard = () => {
     const [admin, setAdmin] = useState({ name: '', email: '' });
@@ -19,10 +20,10 @@ const AdminDashboard = () => {
             if (res.ok) {
             setAdmin({ name: data.admin.name, email: data.admin.email });
             } else {
-                router.push('/Admin/login');
+                router.push(ROUTES.ADMIN_LOGIN);
             }
         } catch (error) {
-            router.push('/Admin/login');
+            router.push(ROUTES.ADMIN_LOGIN);
         }
         };
 
@@ -42,7 +43,7 @@ const AdminDashboard = () => {
     const handleLogout = async () => {
         const res = await fetch('/api/admin-auth/logout', { method: 'POST' });
         if (res.ok) {
-        router.push('/Admin/login');
+         router.push(ROUTES.ADMIN_LOGIN);
         }
     };
 

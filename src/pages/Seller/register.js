@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '../Navbar';
+import Navbar from '../navbar';
 
 export default function SellerRegister() {
   const [name, setName] = useState('');
@@ -39,7 +39,7 @@ export default function SellerRegister() {
 
       const data = await res.json();
       if (res.ok) {
-        router.replace('/SellerDashboard');
+        router.replace('/seller-dashboard');
       } else {
         setError(data.error || 'Registration failed.');
       }

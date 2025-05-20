@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import Navbar from './Navbar';
+import Navbar from './navbar';
+import { ROUTES } from '@/lib/route';
 
 export default function MainRole() {
   const router = useRouter();
@@ -8,10 +9,10 @@ export default function MainRole() {
   const dropdownRef = useRef();
 
   const handleUserLogin = () => {
-    router.push('/User/login');
+     router.push(ROUTES.USER_LOGIN);
   };
   const handleSellerLogin = () => {
-    router.push('/Seller/login');
+    router.push(ROUTES.SELLER_LOGIN);
   };
 
   // Close dropdown when clicking outside

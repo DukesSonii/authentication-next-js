@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUserCircle } from 'react-icons/fa';
 
-export default function SellerDashboard() {
+export default function seller-dashboard() {
   const [sellerInfo, setSellerInfo] = useState({ name: '', email: '' });
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef();
@@ -17,7 +17,7 @@ export default function SellerDashboard() {
         const data = await res.json();
         setSellerInfo({ name: data.name, email: data.email });
       } catch (err) {
-        router.replace('/Seller/login');
+        router.replace(ROUTES.SELLER_LOGIN);
       }
     };
     fetchSeller();
@@ -36,7 +36,7 @@ export default function SellerDashboard() {
 
   const handleLogout = async () => {
     await fetch('/api/seller-auth/logout', { method: 'POST' });
-    router.replace('/Seller/login');
+    router.replace(ROUTES.SELLER_LOGIN);
   };
 
   return (
