@@ -64,7 +64,7 @@ export default function Login() {
   return (
     <>
       <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
-        <div className="bg-white shadow-lg w-full max-w-5xl p-4 flex animate-fadeIn">
+        <div className="bg-white shadow-lg w-full max-w-5xl p-4 flex rounded-[25px]">
           {/* Left Section: Login Form */}
           <div className="w-full md:w-1/2 p-8 flex flex-col items-center">
             <h2 className="roboto-slab text-2xl font-bold mb-2 text-[var(--button-bg)] text-center">Login</h2>
@@ -102,7 +102,7 @@ export default function Login() {
                 />
                 <button
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"
                 >
                   {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
                 </button>
@@ -124,7 +124,7 @@ export default function Login() {
             {/* Divider with Text */}
             <div className="flex items-center my-6 w-full">
               <div className="flex-grow h-px bg-gray-300"></div>
-              <span className="mx-4  text-sm font-medium">Other Login</span>
+              <span className="mx-4  text-sm font-medium text-gray-600">Other Login</span>
               <div className="flex-grow h-px bg-gray-300"></div>
             </div>
 
@@ -136,7 +136,7 @@ export default function Login() {
                     callbackUrl: '/user-dashboard',
                   })
                 }
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-gray-300 shadow-md hover:shadow-lg transition duration-200"
+                className="w-12 h-12 cursor-pointer flex items-center justify-center rounded-full bg-white border border-gray-300 shadow-lg hover:shadow-xl transition duration-200"
               >
                 <FcGoogle size={24} />
               </button>
@@ -148,7 +148,7 @@ export default function Login() {
                     callbackUrl: '/user-dashboard',
                   })
                 }
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-gray-300 shadow-md hover:shadow-lg transition duration-200"
+                className="w-12 h-12 cursor-pointer flex items-center justify-center rounded-full bg-white border border-gray-300 shadow-lg hover:shadow-xl transition duration-200"
               >
                 <FaApple size={22} />
               </button>
@@ -160,7 +160,7 @@ export default function Login() {
                     callbackUrl: '/user-dashboard',
                   })
                 }
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-gray-300 shadow-md hover:shadow-lg transition duration-200"
+                className="w-12 h-12 cursor-pointer flex items-center justify-center rounded-full bg-white border border-gray-300 shadow-lg hover:shadow-xl transition duration-200"
               >
                 <FaFacebook size={22} color="#1877F2" />
               </button>
@@ -169,7 +169,7 @@ export default function Login() {
           </div>
 
           {/* Right Section: Image and Text */}
-          <div className="hidden md:flex md:w-1/2 rounded-r-xl p-8 flex-col justify-end items-center bg-cover bg-center" style={{ backgroundImage: "url('/images/user-login-bg.svg')" }}>
+          <div className="hidden md:flex md:w-1/2 rounded-[25px] p-8 flex-col justify-end items-center bg-cover bg-center" style={{ backgroundImage: "url('/images/user-login-bg.svg')" }}>
             <div className="text-white text-center mb-4">
               <h3 className="text-xl font-bold mb-2">Automate Appointments.</h3>
               <h3 className="text-xl font-bold">Earn More.</h3>

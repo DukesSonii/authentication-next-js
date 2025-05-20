@@ -60,7 +60,7 @@ export default function Register() {
       <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
         <div className="bg-white shadow-lg rounded-xl w-full max-w-5xl p-4 flex animate-fadeIn">
           {/* Left Section: Image and Text */}
-          <div className="hidden md:flex md:w-[40%] rounded-l-xl p-8 flex-col justify-end items-center bg-cover bg-center" style={{ backgroundImage: "url('/images/user-bg-signup.svg')" }}>
+          <div className="hidden md:flex md:w-[40%] rounded-[25px] p-8 flex-col justify-end items-center bg-cover bg-center" style={{ backgroundImage: "url('/images/user-bg-signup.svg')" }}>
             <h3 className="text-2xl font-bold text-white text-center mb-4">
               Start Taking Appointments and Payments.
             </h3>
