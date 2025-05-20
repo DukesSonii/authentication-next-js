@@ -26,7 +26,7 @@ export default function HomePage() {
       } else if (status !== "loading") {
         // Check manual login session
         try {
-          const res = await fetch('/controllers/get-current-user');
+          const res = await fetch('/api/get-current-user');
           if (!res.ok) throw new Error('Not authenticated');
           const data = await res.json();
           setUserInfo({ name: data.name || '', email: data.email || '' });
@@ -43,7 +43,7 @@ export default function HomePage() {
     if (session?.user) {
       await signOut({ callbackUrl: '/User/login' });
     } else {
-      await fetch('/controllers/auth/logout', { method: 'POST' });
+      await fetch('/api/auth/logout', { method: 'POST' });
        router.replace(ROUTES.USER_LOGIN);
     }
   };

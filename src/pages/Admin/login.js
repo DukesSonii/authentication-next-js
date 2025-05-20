@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '../navbar';
-import { ROUTES } from '@/lib/route';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -22,7 +21,7 @@ const AdminLogin = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('/controllers/admin-auth/login', {
+      const res = await fetch('/api/admin-auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -31,7 +30,7 @@ const AdminLogin = () => {
       const data = await res.json();
 
       if (res.ok) {
-        router.push(ROUTES.ADMIN_DASHBOARD);
+        router.push('/admin-dashboard');
       } else {
         setError(data.error || 'Invalid credentials.');
       }

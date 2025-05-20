@@ -12,7 +12,7 @@ export default function seller-dashboard() {
   useEffect(() => {
     const fetchSeller = async () => {
       try {
-        const res = await fetch('/controllers/get-current-seller');
+        const res = await fetch('/api/get-current-seller');
         if (!res.ok) throw new Error('Not logged in');
         const data = await res.json();
         setSellerInfo({ name: data.name, email: data.email });
@@ -35,7 +35,7 @@ export default function seller-dashboard() {
   }, []);
 
   const handleLogout = async () => {
-    await fetch('/controllers/seller-auth/logout', { method: 'POST' });
+    await fetch('/api/seller-auth/logout', { method: 'POST' });
     router.replace(ROUTES.SELLER_LOGIN);
   };
 
